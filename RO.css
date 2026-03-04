@@ -1,0 +1,138 @@
+:root{
+  --bg:#f2f4f6;
+  --card:#ffffff;
+  --muted:#6c737f;
+  --line:rgba(0,0,0,.12);
+  --shadow:0 10px 24px rgba(0,0,0,.10);
+  --green:#00b050;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color:#111;
+}
+
+.page{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding: 18px;
+}
+
+.card{
+  width:min(980px, 96vw);
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 26px 28px 22px;
+}
+
+.topbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  margin-bottom: 10px;
+}
+
+.logo{
+  height: 46px;
+  width: auto;
+}
+
+.circleBack{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid rgba(0,0,0,.18);
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  color:#111;
+  font-weight:800;
+  background:#f7f7f7;
+}
+.circleBack:hover{
+  filter: brightness(.98);
+}
+
+.title{
+  margin: 6px 0 18px;
+  font-size: 24px;
+  font-weight: 500;
+  color:#333;
+}
+
+.form{
+  display:grid;
+  gap: 18px;
+}
+
+.field{
+  display:grid;
+  gap: 6px;
+}
+
+label{
+  font-size: 12px;
+  color: #444;
+}
+
+input, textarea{
+  width:100%;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline:none;
+  background:#fff;
+}
+
+textarea{
+  resize: none;
+  min-height: 110px;
+}
+
+input:focus, textarea:focus{
+  border-color: rgba(0,0,0,.28);
+}
+
+/* Read-only admin feel */
+.readonly{
+  background:#f7f7f7 !important;
+  color:#333;
+}
+
+/* Button Accept full width like design */
+.acceptBtn{
+  width:100%;
+  height: 30px;
+  border:none;
+  border-radius: 999px;
+  background: var(--green);
+  color: #0b1a10;
+  font-weight: 800;
+  letter-spacing: .4px;
+  cursor:pointer;
+}
+
+.acceptBtn:disabled{
+  opacity:.60;
+  cursor:not-allowed;
+}
+
+.status{
+  min-height: 14px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align:center;
+}
+
+.modeInfo{
+  font-size: 11px;
+  color: var(--muted);
+  text-align:center;
+  margin-top:-8px;
+}

@@ -1,0 +1,222 @@
+:root{
+  --green:#00b050;
+  --shadow:0 6px 20px rgba(0,0,0,0.10);
+  --btn1:#d9d6ff;
+  --btn2:#a9a3ff;
+  --ok:#0aa84f;
+  --bad:#d92b2b;
+  --muted:#6c737f;
+  --highlight:#fff6bf;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#fff;
+  color:#111;
+}
+
+.page{
+  width:1100px;
+  margin:0 auto;
+  padding:20px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.logo{ height:55px; width:auto; }
+
+.backBtn{
+  background:#e6e6e6;
+  padding:6px 14px;
+  border-radius:20px;
+  text-decoration:none;
+  font-weight:bold;
+  color:black;
+  box-shadow:0 3px 6px rgba(0,0,0,0.2);
+}
+.backBtn:hover{ background:#d5d5d5; }
+
+.sheet{
+  background:#fff;
+  box-shadow:var(--shadow);
+  padding:16px;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+
+.tableArea{ flex:1; }
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+th{
+  background:var(--green);
+  border:2px solid var(--green);
+  padding:10px;
+  font-weight:800;
+}
+
+td{
+  border:2px solid var(--green);
+  padding:12px;
+  height:45px;
+  vertical-align:middle;
+}
+
+.center{ text-align:center; }
+tbody td.center{ text-align:center; }
+
+td.cell.view{
+  background:#fff;
+  cursor:default;
+}
+td.cell.edit{
+  cursor:text;
+}
+
+tr.highlight td{ background: var(--highlight); }
+
+/* actions */
+.actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:170px;
+  align-items:flex-end;
+  padding-top:8px;
+}
+
+.btn{
+  width:150px;
+  background:linear-gradient(var(--btn1), var(--btn2));
+  border:none;
+  padding:8px 15px;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.status{
+  width:150px;
+  text-align:right;
+  font-size:12px;
+  min-height:14px;
+}
+.status.ok{ color:var(--ok); }
+.status.bad{ color:var(--bad); }
+.status.muted{ color:var(--muted); }
+
+/* notes */
+.notes{
+  margin-top:22px;
+}
+.notesTitle{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+.notesHint{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+.noteItem{
+  font-weight:bold;
+  margin-bottom:6px;
+}
+.notePlus{ color:green; }
+.noteMinus{ color:red; }
+
+/* camera modal - dibuat mirip Login */
+.cameraModal{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.cameraBox{
+  width:min(520px, 94vw);
+  background:white;
+  padding:16px;
+  border-radius:10px;
+  text-align:center;
+  position:relative;
+}
+
+.cameraTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.cameraTitle{
+  font-weight:800;
+}
+
+.closeCamera{
+  background:red;
+  color:white;
+  border:none;
+  padding:6px 10px;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+video{
+  width:100%;
+  height:auto;
+  background:black;   /* penting biar tidak terlihat putih */
+  display:block;
+  border-radius:10px;
+}
+
+canvas{ display:none; }
+
+.captureBtn{
+  margin-top:10px;
+  padding:10px 18px;
+  font-weight:bold;
+  border:none;
+  background:var(--green);
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.cameraStatus{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+  min-height:14px;
+}
+
+/* responsive */
+@media (max-width:1150px){
+  .page{ width:100%; }
+}
+@media (max-width:900px){
+  .sheet{ flex-direction:column; }
+  .actions{ align-items:flex-start; }
+}

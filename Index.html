@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <link rel="stylesheet" href="Index.css">
+</head>
+<body>
+
+<header class="header">
+  <img src="https://images.seeklogo.com/logo-png/31/1/ahm-logo-png_seeklogo-317066.png" class="logo" alt="AHM">
+  <h2>Dashboard</h2>
+</header>
+
+<div class="user-box">
+  <h3>USER</h3>
+  <p id="userName">-</p>
+  <p id="userId">-</p>
+  <p id="userRole" class="role">-</p>
+</div>
+
+<div class="menu-container">
+
+  <div class="menu-card" onclick="openMenu('stock')">
+    <img src="https://cdn-icons-png.flaticon.com/512/679/679720.png" alt="Stock">
+    <h4>STOCK</h4>
+  </div>
+
+  <div class="menu-card" onclick="openMenu('regent')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991112.png" alt="Regent Orders">
+    <h4>REGENT ORDERS</h4>
+  </div>
+
+  <div class="menu-card" onclick="openMenu('client')">
+    <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Client">
+    <h4>CLIENT</h4>
+  </div>
+
+</div>
+
+<!-- TOMBOL PANAH -->
+<div class="admin-toggle" onclick="toggleAdmin()">❯</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+
+  <h3 class="admin-title">ADMIN</h3>
+
+  <div class="admin-user">
+    <div>Nama: <span id="adminName">-</span></div>
+    <div>No ID: <span id="adminId">-</span></div>
+  </div>
+
+  <div class="admin-menu">
+    <div class="admin-option" onclick="openMenu('stock')">STOCK</div>
+    <div class="admin-option" onclick="openMenu('regent')">REGENT ORDERS</div>
+    <div class="admin-option" onclick="openMenu('client')">CLIENT</div>
+  </div>
+
+  <div class="admin-bottom">
+    <div class="akses">Akses Masuk: <span id="loginTime">-</span></div>
+    <button class="logout-btn" onclick="logout()">LOG OUT</button>
+  </div>
+
+</div>
+
+<script src="Index.js"></script>
+</body>
+</html>

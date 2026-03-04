@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Regent Orders</title>
+
+  <link rel="stylesheet" href="RO.css" />
+  <script defer src="RO.js"></script>
+</head>
+
+<body>
+  <div class="page">
+    <div class="card">
+
+      <header class="topbar">
+        <img
+          src="https://seeklogo.com/images/A/ahm-logo-DF87D9699E-seeklogo.com.png"
+          alt="AHM"
+          class="logo"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+        />
+
+        <!-- Back bulat kanan atas -->
+        <a class="circleBack" href="Index.html" aria-label="Back to Dashboard">←</a>
+      </header>
+
+      <h1 class="title">Regent Orders</h1>
+
+      <form id="roForm" class="form" autocomplete="off">
+        <div class="field">
+          <label for="userInput">User</label>
+          <input id="userInput" type="text" placeholder="Nama user / regent" />
+        </div>
+
+        <div class="field">
+          <label for="orderInput">Order / Request</label>
+          <input id="orderInput" type="text" placeholder="Contoh: ME-HYP-07623 x2  |  IN ME-HYP-07623 x5" />
+        </div>
+
+        <div class="field">
+          <label for="ketInput">Keterangan</label>
+          <textarea id="ketInput" rows="4" placeholder="Catatan / kebutuhan / detail request"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="emailInput">Email Regent</label>
+          <input id="emailInput" type="email" placeholder="email@contoh.com" />
+        </div>
+
+        <!-- tombol utama -->
+        <button id="acceptBtn" type="button" class="acceptBtn">ACCEPT</button>
+
+        <div id="status" class="status"></div>
+        <div id="modeInfo" class="modeInfo"></div>
+      </form>
+
+    </div>
+  </div>
+</body>
+</html>

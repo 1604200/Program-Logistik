@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 330px;
+    text-align: center;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: auto;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-inner {
+    width: 100px;
+    height: 100px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h3 {
+    margin: 20px 0 10px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(90deg, #4e2bd9, #5f6bff);
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.scan-btn {
+    background: #5fa4ff;
+}
+
+.next-btn {
+    background: #00b894;
+}
+
+#status {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Fullscreen camera */
+.camera-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 999;
+}
+
+#reader {
+    width: 100%;
+    height: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    border-radius: 50%;
+    background: red;
+}

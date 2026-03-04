@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock</title>
+
+  <link rel="stylesheet" href="Stock.css" />
+
+  <!-- OCR (Tesseract) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+
+  <script defer src="Stock.js"></script>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="header">
+      <img
+        src="https://seeklogo.com/images/A/ahm-logo-DF87D9699E-seeklogo.com.png"
+        class="logo"
+        alt="AHM"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      />
+
+      <a href="Index.html" class="backBtn">← Back</a>
+    </header>
+
+    <section class="sheet">
+      <div class="tableArea">
+        <table id="stockTable" aria-label="Tabel Stock">
+          <thead>
+            <tr>
+              <th class="center">NO RAK</th>
+              <th>NAMA PART</th>
+              <th class="center">NO PART</th>
+              <th class="center">JUMLAH</th>
+              <th>KETERANGAN</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+      <aside class="actions">
+        <button id="editBtn" class="btn">EDIT</button>
+        <button id="scanBtn" class="btn" disabled>SCAN PART</button>
+        <button id="saveBtn" class="btn" disabled>SAVE</button>
+        <button id="cancelBtn" class="btn" disabled>CANCEL</button>
+
+        <div class="status" id="status"></div>
+      </aside>
+    </section>
+
+    <section class="notes">
+      <div class="notesTitle">📄 CATATAN</div>
+      <div class="notesHint">
+        CATATAN otomatis terisi saat Scan (IN +). (Nanti RO ACCEPT bisa isi OUT -)
+      </div>
+      <div id="notesList"></div>
+    </section>
+
+  </div>
+
+  <!-- CAMERA MODAL -->
+  <div id="cameraModal" class="cameraModal">
+    <div class="cameraBox">
+      <div class="cameraTop">
+        <div class="cameraTitle">Scan Part</div>
+        <button id="closeCamera" class="closeCamera">X</button>
+      </div>
+
+      <video id="video" autoplay></video>
+      <canvas id="canvas"></canvas>
+
+      <button id="captureBtn" class="captureBtn">CAPTURE</button>
+      <div id="cameraStatus" class="cameraStatus"></div>
+    </div>
+  </div>
+
+</body>
+</html>

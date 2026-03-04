@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#4274d1,#fcfcfd);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:330px;
+    background:white;
+    padding:30px 20px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#acace1;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+
+.input-wrapper{
+    position:relative;
+    width:100%;
+    margin-top:15px;
+}
+
+input{
+    width:100%;
+    padding:12px 60px 12px 12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+
+.next-btn{
+    position:absolute;
+    right:5px;
+    bottom:5px;
+    padding:6px 10px;
+    font-size:12px;
+    border:none;
+    border-radius:6px;
+    background:#28a745;
+    color:white;
+    cursor:pointer;
+}
+
+.scan-btn{
+    width:100%;
+    padding:10px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#2a5298;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#status{
+    margin-top:12px;
+    font-weight:bold;
+}
+
+/* CAMERA */
+.camera-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:black;
+    z-index:999;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+video{
+    width:90%;
+    max-width:400px;
+    border-radius:15px;
+}
+
+.capture-btn{
+    background:#28a745;
+    margin-top:15px;
+    width:200px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.close-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    background:red;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    color:white;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="avatar">👤</div>
+    <h3>No ID</h3>
+
+    <div class="input-wrapper">
+        <input type="text" id="idInput" placeholder="ID CARD">
+        <button id="nextBtn" class="next-btn">NEXT</button>
+    </div>
+
+    <button id="scanBtn" class="scan-btn">SCAN</button>
+
+    <p id="status"></p>
+
+</div>
+
+<!-- CAMERA -->
+<div id="cameraModal" class="camera-modal">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <button id="captureBtn" class="capture-btn">CAPTURE</button>
+    <button id="closeCamera" class="close-btn">✕</button>
+</div>
+
+<script>
+const users = [
+    { role: "ADMIN", nama: "SUTRISNO", id: "16663" },
+    { role: "ADMIN", nama: "MOH SOFYAN", id: "59549" },
+    { role: "ADMIN", nama: "JONI HARIYONO", id: "17019" },
+    { role: "ADMIN", nama: "ARIMARK TV", id: "47994" },
+    { role: "ADMIN", nama: "SUKIRNO", id: "17221" },
+    { role: "ADMIN", nama: "AAT SOLIHAT", id: "17341" },
+    { role: "ADMIN", nama: "GUNAWAN", id: "17192" },
+    { role: "ADMIN", nama: "SYAIFUL BAHRI", id: "19679" },
+    { role: "ADMIN", nama: "AGUS SANTOSO", id: "36235" },
+    { role: "ADMIN", nama: "AKHMAD SOBIR", id: "37031" },
+    { role: "ADMIN", nama: "VIRGINIA REGITA SARI", id: "PKL 25" }
+];
+
+const scanBtn = document.getElementById("scanBtn");
+const nextBtn = document.getElementById("nextBtn");
+const cameraModal = document.getElementById("cameraModal");
+const closeCamera = document.getElementById("closeCamera");
+const captureBtn = document.getElementById("captureBtn");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const statusText = document.getElementById("status");
+const idInput = document.getElementById("idInput");
+
+let stream;
+
+/* ===== SCAN CAMERA ===== */
+scanBtn.addEventListener("click", async () => {
+    cameraModal.style.display = "flex";
+
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "user" }
+        });
+        video.srcObject = stream;
+    } catch {
+        alert("Kamera tidak bisa dibuka!");
+    }
+});
+
+/* ===== CAPTURE & AUTO LOGIN ===== */
+captureBtn.addEventListener("click", () => {
+
+    const ctx = canvas.getContext("2d");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    ctx.drawImage(video, 0, 0);
+
+    Tesseract.recognize(canvas, "eng")
+    .then(({ data: { text } }) => {
+
+        let cleanedText = text.toUpperCase()
+            .replace(/\n/g, " ")
+            .replace(/O/g, "0")
+            .replace(/I/g, "1")
+            .replace(/S/g, "5")
+            .replace(/B/g, "8");
+
+        let numbersOnly = cleanedText.match(/\d+/g);
+
+        if(numbersOnly){
+            let foundUser = users.find(user =>
+                numbersOnly.includes(user.id)
+            );
+
+            if(foundUser){
+
+                statusText.innerText = "Login Berhasil ✔";
+                statusText.style.color = "green";
+
+                // SIMPAN UNTUK DASHBOARD
+                localStorage.setItem("verifiedName", foundUser.nama);
+                localStorage.setItem("verifiedId", foundUser.id);
+
+                stopCamera();
+                cameraModal.style.display = "none";
+
+                setTimeout(()=>{
+                    window.location.href = "Index.html";
+                },800);
+
+            }else{
+                statusText.innerText = "ID Tidak Dikenali ❌";
+                statusText.style.color = "red";
+            }
+        }else{
+            statusText.innerText = "Tidak ada angka terdeteksi ❌";
+            statusText.style.color = "red";
+        }
+    });
+});
+
+/* ===== LOGIN MANUAL ===== */
+nextBtn.addEventListener("click", () => {
+
+    let inputID = idInput.value.trim();
+    let userFound = users.find(u => u.id === inputID);
+
+    if(userFound){
+
+        statusText.innerText = "Login Berhasil ✔";
+        statusText.style.color = "green";
+
+        localStorage.setItem("verifiedName", userFound.nama);
+        localStorage.setItem("verifiedId", userFound.id);
+
+        setTimeout(()=>{
+            window.location.href = "Index.html";
+        },800);
+
+    }else{
+        statusText.innerText = "ID Tidak Terdaftar ❌";
+        statusText.style.color = "red";
+    }
+});
+
+function stopCamera(){
+    if(stream){
+        stream.getTracks().forEach(track => track.stop());
+    }
+}
+
+closeCamera.addEventListener("click", () => {
+    stopCamera();
+    cameraModal.style.display = "none";
+});
+</script>
+
+</body>
+</html>
